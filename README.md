@@ -28,6 +28,6 @@ Abstract: *Recent advancements in 2D and multimodal models have achieved remarka
 
 We’re wrapping up the final stages of code cleanup and plan to open-source the project by late June—stay tuned!
 
-First author Shijie Zhou will be presenting this work at CVPR in Nashville (June 11–15) and would love to connect if you’re curious to learn more :)
+First author [Shijie Zhou](https://shijiezhou-ucla.github.io/) will be presenting this work at CVPR in Nashville (June 11–15) and would love to connect if you’re curious to learn more :)
 
 Come say hi at our poster session in Exhibit Hall D, Poster #338, on Saturday, June 14, from 8:30–10:30 AM!

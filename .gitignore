@@ -180,5 +180,4 @@ lseg_encoder/demo_e200.ckpt
 /output
 *.xlsx
 
-*.key
-*.pem
+.vscode/

@@ -1,0 +1,14 @@
+prepare:
+  intervals: [1] #[1, 4, 8, 16, 32] #[1, 4]
+  depth_mode: uni
+  # for query cotracker
+  num_long_term_d: 8192 # 20000
+  chunk_long_term_d: 8192 # ! super important
+  num_long_term_s: 8192
+  chunk_long_term_s: 8192
+  epi_th_long_term: 400 # ! fps sensitive
+  long_track_keyframe_interval: 1 # # ! fps sensitive
+  long_track_dyn_subsample: 1
+  # sky
+  dummy_sky_seg: True # not segment out sky
+  dense_interval: True

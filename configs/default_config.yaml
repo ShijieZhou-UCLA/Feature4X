@@ -1,0 +1,22 @@
+NUM_SEMANTIC_CHANNELS: 32 #16
+Head:
+  sam2:
+    enable: True
+    path: sam2_feats.pth
+    head_type: mlp
+    encoder: []
+    decoder: [32, 64, 128, 256]
+
+  internvideo:
+    enable: True
+    path: internvideo_feats.pth
+    head_type: mlp
+    encoder: []
+    decoder: [32, 64, 128, 256, 512, 1024, 1408]
+
+  langseg:
+    enable: True
+    path: rgb_feature_langseg
+    head_type: mlp
+    encoder: []
+    decoder: [32, 64, 128, 256, 512]

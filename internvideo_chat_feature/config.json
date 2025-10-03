@@ -1,0 +1,57 @@
+{
+  "_name_or_path": "./",
+  "model_cls": "InternVideo2_VideoChat2",
+  "architectures": [
+    "InternVideo2_VideoChat2"
+  ],
+  "auto_map": {
+    "AutoConfig": "model_config.VideoChat2Config",
+    "AutoModel": "modeling_videochat2.InternVideo2_VideoChat2"
+  },
+  "model_config": {
+    "bridge": {
+      "extra_num_query_token": 64,
+      "name": "qformer",
+      "num_query_token": 32,
+      "qformer_attention_probs_dropout_prob": 0.1,
+      "qformer_drop_path_rate": 0.2,
+      "qformer_hidden_dropout_prob": 0.1
+    },
+    "freeze_bridge": false,
+    "freeze_llm": false,
+    "freeze_vision_encoder": false,
+    "llm": {
+      "lora_alpha": 32,
+      "lora_dropout": 0.1,
+      "lora_r": 16,
+      "name": "mistral_7b",
+      "pretrained_llm_path": "mistralai/Mistral-7B-Instruct-v0.3",
+      "use_lora": true
+    },
+    "loss": {
+      "use_vision_regression_loss": false
+    },
+    "pretrained_paths": {},
+    "use_flash_attention": true,
+    "vision_encoder": {
+      "checkpoint_num": 48,
+      "d_model": 1408,
+      "encoder_embed_dim": 1408,
+      "img_size": 224,
+      "name": "internvideo2-1B",
+      "num_frames": 8,
+      "origin_num_frames": 4,
+      "patch_size": 14,
+      "pretrained": null,
+      "sep_image_video_pos_embed": true,
+      "tubelet_size": 1,
+      "use_checkpoint": true,
+      "vit_add_ln": true,
+      "x_vis_only": true,
+      "x_vis_return_idx": -2
+    }
+  },
+  "torch_dtype": "float32",
+  "transformers_version": "4.38.0",
+  "use_cache": true
+}

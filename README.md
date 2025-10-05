@@ -1,5 +1,5 @@
 # Feature4X: Bridging Any Monocular Video to 4D Agentic AI with Versatile Gaussian Feature Fields
-Shijie Zhou*, <a href="https://rhfeiyang.github.io/" target="_blank">Hui Ren*</a>, Yijia Weng, Shuwang Zhang, Zhen Wang, Dejia Xu, Zhiwen Fan, Suya You, Zhangyang Wang, Leonidas Guibas, Achuta Kadambi (* indicates equal contribution)<br>
+<a href="https://shijiezhou-ucla.github.io/" target="_blank">Shijie Zhou*</a>, <a href="https://rhfeiyang.github.io" target="_blank">Hui Ren*</a>, <a href="https://yijiaweng.github.io/" target="_blank">Yijia Weng</a>, <a href="https://www.linkedin.com/in/shuwang-zhang" target="_blank">Shuwang Zhang</a>, <a href="https://zhenwangwz.github.io/" target="_blank">Zhen Wang</a>, <a href="https://ir1d.github.io/" target="_blank">Dejia Xu</a>, <a href="https://zhiwenfan.github.io/" target="_blank">Zhiwen Fan</a>, <a href="https://scholar.google.com/citations?user=LkpA-L0AAAAJ&hl=en" target="_blank">Suya You</a>, <a href="https://vita-group.github.io/" target="_blank">Zhangyang Wang</a>, <a href="https://profiles.stanford.edu/leonidas-guibas" target="_blank">Leonidas Guibas</a>, <a href="https://samueli.ucla.edu/people/achuta-kadambi/" target="_blank">Achuta Kadambi</a> (* indicates equal contribution)<br>
 | [Website](https://feature4x.github.io/) | [Paper](https://arxiv.org/pdf/2503.20776) | [Video](https://www.youtube.com/watch?v=-LQsnYFkciw) | <br>
 ![Teaser image](assets/thumbnail.png)
 
@@ -33,15 +33,38 @@ conda activate feature4x
 
 # Download model weights for preprocessing and feature fields
 bash setup_weights.sh
+```
 
-# Make sure you're in the project root directory and conda environment is activated
-conda activate feature4x
+<details>
+<summary><strong>Tip:</strong> Windows shows <code>$'\r': command not found</code></summary>
 
-# Input your video and distill all features (SAM2, CLIP-Lseg, InternVideo2) and reconstruct the 4D feature fields
+```
+sed -i 's/\r$//' setup_weights.sh
+```
+
+</details>
+
+## Distill 4D feature fields
+Place your dataset inside `./data/`. It should either include a single `.mp4` video or an `images/` subfolder with the frame sequence. An example dataset is available at `data/car/`. A typical folder layout looks like this:
+
+```
+data/
+└── car/                      # Example sequence name
+    ├── video.mp4             # Option 1: single video input
+    or
+    └── images/               # Option 2: ordered RGB frames
+        ├── frame_001.jpg
+        ├── frame_002.jpg
+        └── ...
+```
+
+After the data is prepared, set your data path in the script below to distill SAM2, CLIP-LSeg, and InternVideo2 features and reconstruct the 4D feature fields.
+
+```bash
 bash setup_feature_fields.sh
 ```
 
-## Usage
+## Inference
 
 ### 🔧 Environment Variables Setup (One-time)
 Before using Feature4X, set up your API keys to avoid entering them repeatedly:
@@ -160,7 +183,7 @@ python agent_chat.py --data_name bear --rendered_view 3D_moving --question "What
 We sincerely thank the authors and contributors of the following open-source projects, which were instrumental in the development of Feature4X:
 
 - **[MoSca](https://github.com/csbhr/MoSca)** - Dynamic Scene Reconstruction
-- **[Feature 3DGS](https://github.com/ShijieZhou-UCLA/feature-3dgs)** - Feature Splatting for Language-Guided Scene Understanding and Manipulation
+- **[Feature 3DGS](https://github.com/ShijieZhou-UCLA/feature-3dgs)** - Feature Splatting Foundation for Various Downstream Tasks  
 - **[SAM2](https://github.com/facebookresearch/segment-anything-2)** - Segment Anything in Images and Videos
 - **[CLIP-LSeg](https://github.com/isl-org/lang-seg)** - Language-driven Semantic Segmentation
 - **[InternVideo2](https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo2)** - Video Foundation Models for Multimodal Understanding

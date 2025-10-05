@@ -1,15 +1,9 @@
-# Authors: Hui Ren (rhfeiyang.github.io)
 import os
 import sys
 os.chdir(os.path.dirname(__file__))
-token = os.environ['HF_TOKEN']
 import torch
 import argparse
 from transformers import AutoTokenizer, AutoModel
-# from modeling_videochat2 import InternVideo2_VideoChat2
-# os.environ["http_proxy"] = "http://localhost:7895"
-# os.environ["https_proxy"] = "http://localhost:7895"
-
 from modeling_videochat2 import InternVideo2_VideoChat2
 from transformers import AutoTokenizer, AutoModel, AutoConfig
 from tqdm import tqdm
@@ -17,25 +11,6 @@ import cv2 as cv
 import os.path as osp
 import torch
 import imageio
-# config = AutoConfig.from_pretrained(
-#     './',
-#     trust_remote_code=True,
-# )
-
-# model = InternVideo2_VideoChat2(config=config).cuda()
-
-
-
-# model = AutoModel.from_pretrained(
-#     './',
-#     torch_dtype=torch.bfloat16,
-#     trust_remote_code=True,
-#     cache_dir="./",
-#     local_files_only=True,
-# ).cuda()
-
-
-
 import numpy as np
 import decord
 from decord import VideoReader, cpu
@@ -141,8 +116,6 @@ def load_video(video_path, num_segments=8, return_msg=False, resolution=224, hd_
     else:
         return frames_list, num_frames
 
-
-
 def parse_args():
     parser = argparse.ArgumentParser(description='Extract features from video')
     parser.add_argument('--video_path', type=str, default="yoga.mp4", help='path to the video')
@@ -154,7 +127,6 @@ if __name__ == "__main__":
 
     #get encoder
     encoder = model.vision_encoder.cuda()
-
     args = parse_args()
     video_path = args.video_path
     # sample uniformly 8 frames from the video
@@ -167,29 +139,9 @@ if __name__ == "__main__":
         video_tensor, frame_id = data
         frame_id = torch.tensor(frame_id)
         video_tensor = video_tensor.to("cuda")
-
-        ## sanity check
-        # chat_history= []
-        # response, chat_history = model.chat(tokenizer, '', 'describe the action step by step.', media_type='video', media_tensor=video_tensor, chat_history= chat_history, return_history=True,generation_config={'do_sample':False, "feat":None})
-        # print(response)
-        # # The video shows a woman performing yoga on a rooftop with a beautiful view of the mountains in the background. She starts by standing on her hands and knees, then moves into a downward dog position, and finally ends with a standing position. Throughout the video, she maintains a steady and fluid movement, focusing on her breathing and alignment. The video is a great example of how yoga can be practiced in different environments and how it can be a great way to connect with nature and find inner peace.
-
-
-
         video_tensor = video_tensor.permute(1, 0, 2, 3).unsqueeze(0)
         # specify ret_map=True to get the feat
         vid_feat, cls_feat=encoder(video_tensor, ret_map=True)
-
-
-        ## test: restore feature
-        # chat_history= []
-        # vid_feat_flatten = vid_feat.view(vid_feat.size(0), -1, 1408)
-        # restore_feat = torch.cat([cls_feat,vid_feat_flatten], dim=1)
-        # response, chat_history = model.chat(tokenizer, '', 'describe the action step by step.', media_type='video', media_tensor=None, chat_history= chat_history, return_history=True,generation_config={'do_sample':False, "feat":restore_feat})
-        # print(response)
-        # The video shows a woman performing yoga on a rooftop with a beautiful view of the mountains in the background. She starts by standing on her hands and knees, then moves into a downward dog position, and finally ends with a standing position. Throughout the video, she maintains a steady and fluid movement, focusing on her breathing and alignment. The video is a great example of how yoga can be practiced in different environments and how it can be a great way to connect with nature and find inner peace.
-
-
         video_feat_all[frame_id] = vid_feat
         cls_feat_list.append(cls_feat)
 
@@ -206,15 +158,4 @@ if __name__ == "__main__":
     torch.save(result, save_path)
 
 
-
-
-    # chat_history= []
-    # response, chat_history = model.chat(tokenizer, '', 'describe the action step by step.', media_type='video', media_tensor=video_tensor, chat_history= chat_history, return_history=True,generation_config={'do_sample':False})
-    # print(response)
-    # # The video shows a woman performing yoga on a rooftop with a beautiful view of the mountains in the background. She starts by standing on her hands and knees, then moves into a downward dog position, and finally ends with a standing position. Throughout the video, she maintains a steady and fluid movement, focusing on her breath and alignment. The video is a great example of how yoga can be practiced in different environments and how it can be a great way to connect with nature and find inner peace.
-    # # The woman in the video is performing a yoga pose on a rooftop. She starts by standing on her hands and knees, then she moves her legs to the side and stretches her arms out. She then moves her arms to the side and stretches her legs out. Finally, she moves her arms to the side and stretches her legs out again.
-    #
-    # response, chat_history = model.chat(tokenizer, '', 'What is she wearing?', media_type='video', media_tensor=video_tensor, chat_history= chat_history, return_history=True,generation_config={'do_sample':False})
-    # # The woman in the video is wearing a black tank top and grey yoga pants.
-    # print(response)
 

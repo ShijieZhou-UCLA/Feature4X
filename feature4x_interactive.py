@@ -405,11 +405,11 @@ class Feature4XInterface:
         threshold_ub = float(threshold_ub_input) if threshold_ub_input else 0.95
 
         # Number of attempts
-        num_prompt_input = input(f"Number of tuning attempts between thresholds [default: 10]: ").strip()
-        num_prompt = int(num_prompt_input) if num_prompt_input else 10
+        num_attempt_input = input(f"Number of tuning attempts between thresholds [default: 10]: ").strip()
+        num_attempt = int(num_attempt_input) if num_attempt_input else 10
         
         print(f"\n📊 Tuning Configuration:")
-        print(f"   • Will test {num_prompt} different threshold values")
+        print(f"   • Will test {num_attempt} different threshold values")
         print(f"   • Threshold range: {threshold_lb:.2f} to {threshold_ub:.2f}")
         print(f"   • The agent will automatically find the best threshold for your edit")
         
@@ -439,7 +439,7 @@ class Feature4XInterface:
             "--config", config_path,
             "--root", root_dir,
             "--user_prompt", user_prompt,
-            "--num_prompt", str(num_prompt),
+            "--num_attempt", str(num_attempt),
             "--threshold_lb", str(threshold_lb),
             "--threshold_ub", str(threshold_ub)
         ]

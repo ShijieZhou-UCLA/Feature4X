@@ -166,11 +166,13 @@ logs
 
 tools/weights
 weights
-# /data
+# example data
+data/car/images
+data/car/preprocess
 # .mp4
 
 lib_prior/mono_depth/checkpoints/
-/lib_render/gs3d/diff_gaussian_rasterization-alphadep-new_feature/cmake-build-debug/
+/lib_render/gs3d/diff_gaussian_rasterization-alphadep-feature/cmake-build-debug/
 *.pth
 *.0
 *.pt

@@ -6,6 +6,7 @@ wget https://www.dropbox.com/s/4j4z58wuv8o0mfz/models.zip
 unzip models.zip
 mv models raft_models
 mv models.zip raft_models.zip
+cd ..
 
 #### SAM2 ####
 cd sam2

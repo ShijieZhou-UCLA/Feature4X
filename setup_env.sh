@@ -17,7 +17,7 @@ pip install torch_geometric
 
 pip install lib_render/gs3d/simple-knn
 pip install lib_render/gs3d/gof-diff-gaussian-rasterization
-pip install lib_render/gs3d/diff_gaussian_rasterization-alphadep-new_feature
+pip install lib_render/gs3d/diff_gaussian_rasterization-alphadep-feature
 
 pip install transformers==4.46.0 #git+https://github.com/huggingface/transformers.git
 pip install lpips pytorch_msssim
